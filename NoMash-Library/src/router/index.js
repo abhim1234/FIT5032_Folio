@@ -1,35 +1,63 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import AboutView from '../views/AboutView.vue';
-import LoginView from '../views/LoginView.vue';
-import AccessDeniedView from '../views/AccessDeniedView.vue';
-import { ref } from 'vue';
-
-// Reactive state for authentication
-export const isAuthenticated = ref(false);
+import AdminDashboard from '../views/AdminDashboard.vue';
+import UserDashboard from '../views/UserDashboard.vue';
+import FirebaseRegister from '../views/FirebaseRegisterView.vue';
+import FirebaseSignin from '../views/FirebaseSigninView.vue';
+import { getAuth } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Import Firestore methods
+import { ref } from 'vue'; // Import ref to create reactive state
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
-  { path: '/about', name: 'about', component: AboutView, meta: { requiresAuth: true } },
-  { path: '/login', name: 'login', component: LoginView },
-  { path: '/access-denied', name: 'access-denied', component: AccessDeniedView }
+  { path: '/admin-dashboard', name: 'admin-dashboard', component: AdminDashboard, meta: { requiresAuth: true, role: 'admin' } },
+  { path: '/user-dashboard', name: 'user-dashboard', component: UserDashboard, meta: { requiresAuth: true, role: 'user' } },
+  { path: '/FireRegister', name: 'FirebaseRegister', component: FirebaseRegister },
+  { path: '/FireLogin', name: 'FirebaseSignin', component: FirebaseSignin }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!isAuthenticated.value) {
-      next('/access-denied'); // Redirect to access-denied page
-    } else {
-      next();
+// Reactive state for authentication
+export const isAuthenticated = ref(false); // Define and export isAuthenticated
+
+// Route guard to protect routes based on authentication and roles
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (requiresAuth && !user) {
+    next('/FireLogin'); // Redirect to login if not authenticated
+  } else if (requiresAuth && user) {
+    try {
+      const db = getFirestore();
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const userRole = userData.role; // Fetch the user's role from Firestore
+
+        if (to.meta.role && userRole !== to.meta.role) {
+          next('/'); // Redirect to home if the user does not have the required role
+        } else {
+          next(); // Proceed to the route
+        }
+      } else {
+        console.error('No such user document in Firestore!');
+        next('/'); // Redirect to home if no user document is found
+      }
+    } catch (error) {
+      console.error('Error fetching user role from Firestore:', error);
+      next('/'); // Redirect to home if there's an error
     }
   } else {
-    next();
+    next(); // Proceed normally if no authentication is required
   }
 });
 
