@@ -12,9 +12,10 @@
             <li class="nav-item">
               <router-link
                 :class="['mx-2', isActiveLink('/FireRegister') ? 'btn btn-primary active-link' : 'inactive-link']"
-                to="/FireRegister" exact
+                to="/FireRegister"
+                exact
               >
-                Register (Week 6)
+                Register (Week 8)
               </router-link>
             </li>
             <li v-if="!isAuthenticated" class="nav-item">
@@ -27,6 +28,15 @@
             </li>
             <li v-else class="nav-item">
               <button @click="logout" class="btn btn-danger mx-2">Logout</button>
+            </li>
+            <!-- Add Book Button -->
+            <li class="nav-item">
+              <router-link
+                :class="['mx-2', isActiveLink('/addBook') ? 'btn btn-primary active-link' : 'inactive-link']"
+                to="/addBook"
+              >
+                Add, Update, or Delete Book
+              </router-link>
             </li>
           </ul>
         </div>

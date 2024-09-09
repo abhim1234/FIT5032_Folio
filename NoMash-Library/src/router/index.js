@@ -8,13 +8,15 @@ import FirebaseSignin from '../views/FirebaseSigninView.vue';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Import Firestore methods
 import { ref } from 'vue'; // Import ref to create reactive state
+import AddBookView from '../views/AddBookView.vue';
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
+  { path: '/', redirect: '/FireLogin' },
   { path: '/admin-dashboard', name: 'admin-dashboard', component: AdminDashboard, meta: { requiresAuth: true, role: 'admin' } },
   { path: '/user-dashboard', name: 'user-dashboard', component: UserDashboard, meta: { requiresAuth: true, role: 'user' } },
   { path: '/FireRegister', name: 'FirebaseRegister', component: FirebaseRegister },
-  { path: '/FireLogin', name: 'FirebaseSignin', component: FirebaseSignin }
+  { path: '/FireLogin', name: 'FirebaseSignin', component: FirebaseSignin },
+  { path: '/addBook', name: 'AddBook', component: AddBookView },
 ];
 
 const router = createRouter({
