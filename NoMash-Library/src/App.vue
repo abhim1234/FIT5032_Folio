@@ -38,6 +38,14 @@
                 Add, Update, or Delete Book
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link
+                :class="['mx-2', isActiveLink('/GetBookCount') ? 'btn btn-primary active-link' : 'inactive-link']"
+                to="/GetBookCount"
+              >
+                GetBookCount
+              </router-link>
+            </li>
           </ul>
         </div>
       </div>
