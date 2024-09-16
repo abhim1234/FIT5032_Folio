@@ -9,6 +9,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Import Firestore methods
 import { ref } from 'vue'; // Import ref to create reactive state
 import AddBookView from '../views/AddBookView.vue';
+import GetBookCountView from '../views/GetBookCountView.vue'
 
 const routes = [
   { path: '/', redirect: '/FireLogin' },
@@ -17,6 +18,7 @@ const routes = [
   { path: '/FireRegister', name: 'FirebaseRegister', component: FirebaseRegister },
   { path: '/FireLogin', name: 'FirebaseSignin', component: FirebaseSignin },
   { path: '/addBook', name: 'AddBook', component: AddBookView },
+  { path: '/GetBookCount', name: 'GetBookCount', component: GetBookCountView },
 ];
 
 const router = createRouter({
