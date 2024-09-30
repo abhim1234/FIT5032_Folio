@@ -9,7 +9,10 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Import Firestore methods
 import { ref } from 'vue'; // Import ref to create reactive state
 import AddBookView from '../views/AddBookView.vue';
-import GetBookCountView from '../views/GetBookCountView.vue'
+import GetBookCountView from '../views/GetBookCountView.vue';
+import WeatherView from '../views/WeatherView.vue';
+import CountBookAPI from '../views/CountBookAPI.vue';
+import GetAllBookAPI from '../views/GetAllBookAPI.vue';
 
 const routes = [
   { path: '/', redirect: '/FireLogin' },
@@ -19,6 +22,9 @@ const routes = [
   { path: '/FireLogin', name: 'FirebaseSignin', component: FirebaseSignin },
   { path: '/addBook', name: 'AddBook', component: AddBookView },
   { path: '/GetBookCount', name: 'GetBookCount', component: GetBookCountView },
+  { path: '/WeatherCheck', name: 'WeatherCheck', component: WeatherView },
+  { path: '/CountBookAPI', name: 'CountBookAPI', component: CountBookAPI },
+  { path: '/GetAllBookAPI', name: 'GetAllBookAPI', component: GetAllBookAPI },
 ];
 
 const router = createRouter({

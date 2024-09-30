@@ -1,21 +1,21 @@
-<!-- src/App.vue -->
 <template>
   <div class="main-container">
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
+    <header v-if="showHeader" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <router-link class="navbar-brand" to="/FireLogin">My App</router-link>
+        <router-link class="navbar-brand" to="/WeatherCheck">My App (Week 10)</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
+            <!-- 
             <li class="nav-item">
               <router-link
                 :class="['mx-2', isActiveLink('/FireRegister') ? 'btn btn-primary active-link' : 'inactive-link']"
                 to="/FireRegister"
                 exact
               >
-                Register (Week 8)
+                Register (Week 10)
               </router-link>
             </li>
             <li v-if="!isAuthenticated" class="nav-item">
@@ -29,7 +29,8 @@
             <li v-else class="nav-item">
               <button @click="logout" class="btn btn-danger mx-2">Logout</button>
             </li>
-            <!-- Add Book Button -->
+            -->
+            <!-- Add Book Button
             <li class="nav-item">
               <router-link
                 :class="['mx-2', isActiveLink('/addBook') ? 'btn btn-primary active-link' : 'inactive-link']"
@@ -38,12 +39,37 @@
                 Add, Update, or Delete Book
               </router-link>
             </li>
+          -->
             <li class="nav-item">
               <router-link
                 :class="['mx-2', isActiveLink('/GetBookCount') ? 'btn btn-primary active-link' : 'inactive-link']"
                 to="/GetBookCount"
               >
                 GetBookCount
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                :class="['mx-2', isActiveLink('/WeatherCheck') ? 'btn btn-primary active-link' : 'inactive-link']"
+                to="/WeatherCheck"
+              >
+                GetWeather
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                :class="['mx-2', isActiveLink('/CountBookAPI') ? 'btn btn-primary active-link' : 'inactive-link']"
+                to="/CountBookAPI"
+              >
+                CountBookAPI
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                :class="['mx-2', isActiveLink('/GetAllBookAPI') ? 'btn btn-primary active-link' : 'inactive-link']"
+                to="/GetAllBookAPI"
+              >
+                GetAllBookAPI
               </router-link>
             </li>
           </ul>
@@ -56,25 +82,30 @@
   </div>
 </template>
 
-<script setup>
-import { computed } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { isAuthenticated } from './router'; // Correctly import isAuthenticated
+<script>
+import BHeader from './components/BHeader.vue';
+import CountBookAPI from './views/CountBookAPI.vue';
 
-const router = useRouter();
-const route = useRoute();
-
-const isActiveLink = (path) => {
-  if (path === '/about') {
-    return route.path === '/about' || route.path === '/access-denied';
-  } else {
-    return route.path === path;
+export default {
+  name: 'App',
+  components: {
+    BHeader,
+    CountBookAPI,
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== 'CountBookAPI';
+    },
+    isActiveLink() {
+      return (path) => this.$route.path === path;
+    }
+  },
+  methods: {
+    logout() {
+      isAuthenticated.value = false; // Update authentication state
+      this.$router.push('/FireLogin'); // Redirect to login page
+    }
   }
-};
-
-const logout = () => {
-  isAuthenticated.value = false; // Update authentication state
-  router.push('/FireLogin'); // Redirect to login page
 };
 </script>
 
