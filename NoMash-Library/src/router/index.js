@@ -15,7 +15,7 @@ import CountBookAPI from '../views/CountBookAPI.vue';
 import GetAllBookAPI from '../views/GetAllBookAPI.vue';
 
 const routes = [
-  { path: '/', redirect: '/FireLogin' },
+  { path: '/', redirect: '/WeatherCheck' },
   { path: '/admin-dashboard', name: 'admin-dashboard', component: AdminDashboard, meta: { requiresAuth: true, role: 'admin' } },
   { path: '/user-dashboard', name: 'user-dashboard', component: UserDashboard, meta: { requiresAuth: true, role: 'user' } },
   { path: '/FireRegister', name: 'FirebaseRegister', component: FirebaseRegister },
