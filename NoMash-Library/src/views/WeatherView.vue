@@ -13,17 +13,13 @@
       </div>
     </div>
 
-    <main>
-      <div v-if="weatherData">
-        <h2>
-          {{ weatherData.name }}, {{ weatherData.sys.country }}
-        </h2>
-        <div>
-          <img :src="iconUrl" alt="Weather Icon" />
-          <p>{{ temperature }} °C</p>
-        </div>
-        <span>{{ weatherData.weather[0].description }}</span>
+    <main v-if="weatherData">
+      <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+      <div>
+        <img :src="iconUrl" alt="Weather Icon" v-if="iconUrl" />
+        <p>{{ temperature }} °C</p>
       </div>
+      <span>{{ weatherData.weather[0].description }}</span>
     </main>
   </div>
 </template>
@@ -37,20 +33,19 @@ export default {
     return {
       city: "",
       weatherData: null,
-      hourlyForecast: [],
-      dailyForecast: [],
     };
   },
   computed: {
     temperature() {
-      return this.weatherData
-        ? this.weatherData.main.temp // Since we request in metric units (Celsius)
-        : null;
+      return this.weatherData ? this.weatherData.main.temp : null;
     },
     iconUrl() {
       return this.weatherData
         ? `https://openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
         : null;
+    },
+    apiKey() {
+      return import.meta.env.VITE_WEATHER_API_KEY; // Make sure the API key is in your .env file
     },
   },
   mounted() {
@@ -79,10 +74,5 @@ export default {
       await this.fetchWeatherData(url);
     },
   },
-  computed: {
-    apiKey() {
-      return import.meta.env.VITE_WEATHER_API_KEY;
-    }
-  }
 };
 </script>
