@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1 style="text-align: center;">WEATHER APP</h1>
-    
-    <div style="display: flex; justify-content: center; margin-bottom: 20px; max-width: 400px; margin: 0 auto;">
+
+    <div class="input-container">
       <input
         type="text"
         v-model="city"
         placeholder="Enter city name"
-        style="padding: 10px; font-size: 16px; flex: 1; border: 1px solid #000; border-right: none; border-radius: 5px 0 0 5px; box-sizing: border-box;"
+        class="input-field"
       />
       <button 
         @click="searchByCity"
-        style="padding: 10px; font-size: 16px; flex: 1; background-color: #007BFF; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; box-sizing: border-box;"
+        class="search-button"
       >
         Search
       </button>
@@ -82,3 +82,42 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-field, .search-button {
+  padding: 10px;
+  font-size: 16px;
+  height: 50px; /* Same height for both input and button */
+  box-sizing: border-box;
+}
+
+.input-field {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  width: 100%;
+}
+
+.search-button {
+  flex: 1;
+  background-color: #007BFF;
+  color: white;
+  border: 1px solid #007BFF;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+</style>
