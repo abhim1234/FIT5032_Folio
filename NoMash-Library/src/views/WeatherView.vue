@@ -7,11 +7,12 @@
         type="text"
         v-model="city"
         placeholder="Enter city name"
-        style="width: 200px; padding: 10px; box-sizing: border-box;"  <!-- Defining width and padding for input -->
+        style="width: 200px; height: 40px;" <!-- Ensure the same width and height -->
       />
       <button 
         @click="searchByCity" 
-        style="width: 200px; padding: 10px; box-sizing: border-box;"> <!-- Same width and padding for the button -->
+        style="width: 200px; height: 40px;" <!-- Same width and height for button -->
+      >
         Search
       </button>
     </div>
