@@ -44,12 +44,12 @@ export default {
   computed: {
     temperature() {
       return this.weatherData
-        ? Math.floor(this.weatherData.main.temp - 273)
+        ? this.weatherData.main.temp // Since we request in metric units (Celsius)
         : null;
     },
     iconUrl() {
       return this.weatherData
-        ? `http://api.openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
+        ? `https://openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
         : null;
     },
   },
@@ -61,7 +61,7 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
           const { latitude, longitude } = position.coords;
-          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`;
+          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}&units=metric`;
           await this.fetchWeatherData(url);
         });
       }
@@ -75,7 +75,7 @@ export default {
       }
     },
     async searchByCity() {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${this.apiKey}`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${this.apiKey}&units=metric`;
       await this.fetchWeatherData(url);
     },
   },
