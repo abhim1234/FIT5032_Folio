@@ -33,17 +33,5 @@
     "prettier": "^3.2.5",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1"
-  },
-  "description": "test",
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abhim1234/FIT5032_Folio.git"
-  },
-  "author": "abhimanyu",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abhim1234/FIT5032_Folio/issues"
-  },
-  "homepage": "https://github.com/abhim1234/FIT5032_Folio#readme"
+  }
 }
