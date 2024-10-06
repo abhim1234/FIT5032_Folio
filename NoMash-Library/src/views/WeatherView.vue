@@ -7,8 +7,14 @@
         type="text"
         v-model="city"
         placeholder="Enter city name"
+        style="padding: 10px; font-size: 16px; flex: 1;"
       />
-      <button @click="searchByCity">Search</button>
+      <button 
+        @click="searchByCity"
+        style="padding: 10px; font-size: 16px; flex: 1; cursor: pointer;"
+      >
+        Search
+      </button>
     </div>
 
     <div v-if="weatherData" style="text-align: center;">
