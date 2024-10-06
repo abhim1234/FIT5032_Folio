@@ -7,11 +7,11 @@
         type="text"
         v-model="city"
         placeholder="Enter city name"
-        style="padding: 10px; font-size: 16px; flex: 1;"
+        style="padding: 10px; font-size: 16px; width: 200px; border-radius: 5px; border: 1px solid #000;"
       />
       <button 
         @click="searchByCity"
-        style="padding: 10px; font-size: 16px; flex: 1; cursor: pointer;"
+        style="padding: 10px; font-size: 16px; width: 200px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"
       >
         Search
       </button>
