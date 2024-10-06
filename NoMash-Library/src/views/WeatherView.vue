@@ -1,26 +1,26 @@
 <template>
-  <div class="container">
-    <div class="header">
-      <h1>WEATHER APP</h1>
-      <div class="search-bar">
-        <input
-          type="text"
-          v-model="city"
-          placeholder="Enter city name"
-          class="search-input"
-        />
-        <button @click="searchByCity" class="search-button">Search</button>
-      </div>
+  <div>
+    <h1 style="text-align: center;">WEATHER APP</h1>
+    
+    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+      <input
+        type="text"
+        v-model="city"
+        placeholder="Enter city name"
+      />
+      <button @click="searchByCity">Search</button>
     </div>
 
-    <main v-if="weatherData">
-      <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
+    <div v-if="weatherData" style="text-align: center;">
+      <h2>
+        {{ weatherData.name }}, {{ weatherData.sys.country }}
+      </h2>
       <div>
         <img :src="iconUrl" alt="Weather Icon" v-if="iconUrl" />
         <p>{{ temperature }} °C</p>
       </div>
-      <span>{{ weatherData.weather[0].description }}</span>
-    </main>
+      <p>{{ weatherData.weather[0].description }}</p>
+    </div>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
         : null;
     },
     apiKey() {
-      return import.meta.env.VITE_WEATHER_API_KEY; // Make sure the API key is in your .env file
+      return import.meta.env.VITE_WEATHER_API_KEY; // Ensure the API key is correctly configured
     },
   },
   mounted() {
