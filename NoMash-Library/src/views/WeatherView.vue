@@ -32,6 +32,7 @@
 </template>
 
 
+
 <script>
 import axios from "axios";
 
@@ -133,6 +134,9 @@ export default {
 .weather-info {
   text-align: center;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weather-icon {
@@ -152,4 +156,12 @@ export default {
   color: #555;
   margin: 10px 0;
 }
+
+/* Ensure each element is stacked vertically */
+.weather-info > * {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
 </style>
+
