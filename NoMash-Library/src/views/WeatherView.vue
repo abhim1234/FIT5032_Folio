@@ -13,13 +13,15 @@
       </div>
     </div>
 
-    <main v-if="weatherData">
+    <main v-if="weatherData" class="weather-output">
       <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
-      <div>
-        <img :src="iconUrl" alt="Weather Icon" v-if="iconUrl" />
-        <p>{{ temperature }} °C</p>
+      <div class="weather-details">
+        <div class="weather-icon">
+          <img :src="iconUrl" alt="Weather Icon" />
+        </div>
+        <p class="temperature">{{ temperature }} °C</p>
       </div>
-      <span>{{ weatherData.weather[0].description }}</span>
+      <span class="description">{{ weatherData.weather[0].description }}</span>
     </main>
   </div>
 </template>
@@ -122,13 +124,36 @@ export default {
   background-color: #0056b3;
 }
 
-main {
+.weather-output {
   text-align: center;
   margin-top: 20px;
 }
 
-main img {
-  width: 100px;
-  height: 100px;
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.weather-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temperature {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.description {
+  font-size: 18px;
+  color: #666;
+  margin-top: 10px;
 }
 </style>
