@@ -13,18 +13,24 @@
       </div>
     </div>
 
-    <main v-if="weatherData" class="weather-output">
+    <main v-if="weatherData" class="weather-info">
+      <!-- Line 1: City, Country -->
       <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
-      <div class="weather-details">
-        <div class="weather-icon">
-          <img :src="iconUrl" alt="Weather Icon" />
-        </div>
-        <p class="temperature">{{ temperature }} °C</p>
+      
+      <!-- Line 2: Weather Icon -->
+      <div>
+        <img :src="iconUrl" alt="Weather Icon" v-if="iconUrl" class="weather-icon" />
       </div>
-      <span class="description">{{ weatherData.weather[0].description }}</span>
+      
+      <!-- Line 3: Temperature -->
+      <div class="temperature">{{ temperature }} °C</div>
+
+      <!-- Line 4: Weather Description -->
+      <div class="description">{{ weatherData.weather[0].description }}</div>
     </main>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -124,36 +130,26 @@ export default {
   background-color: #0056b3;
 }
 
-.weather-output {
+.weather-info {
   text-align: center;
   margin-top: 20px;
 }
 
-.weather-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
 .weather-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: orange;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100px;
+  height: 100px;
+  margin: 10px 0;
 }
 
 .temperature {
   font-size: 24px;
-  margin-top: 10px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .description {
   font-size: 18px;
-  color: #666;
-  margin-top: 10px;
+  color: #555;
+  margin: 10px 0;
 }
 </style>
