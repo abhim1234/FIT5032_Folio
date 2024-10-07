@@ -2,7 +2,7 @@
   <div class="main-container">
     <header v-if="showHeader" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <router-link class="navbar-brand" to="/WeatherCheck">My App (Week 10)</router-link>
+        <router-link class="navbar-brand" to="/WeatherCheck">My App (Week 11)</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
