@@ -1,26 +1,26 @@
 <template>
-  <div>
-    <h1 style="text-align: center;">WEATHER APP</h1>
-    
-    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-      <input
-        type="text"
-        v-model="city"
-        placeholder="Enter city name"
-      />
-      <button @click="searchByCity">Search</button>
+  <div class="container">
+    <div class="header">
+      <h1>WEATHER APP</h1>
+      <div class="search-bar">
+        <input
+          type="text"
+          v-model="city"
+          placeholder="Enter city name"
+          class="search-input"
+        />
+        <button @click="searchByCity" class="search-button">Search</button>
+      </div>
     </div>
 
-    <div v-if="weatherData" style="text-align: center;">
-      <h2>
-        {{ weatherData.name }}, {{ weatherData.sys.country }}
-      </h2>
+    <main v-if="weatherData">
+      <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
       <div>
         <img :src="iconUrl" alt="Weather Icon" v-if="iconUrl" />
         <p>{{ temperature }} °C</p>
       </div>
-      <p>{{ weatherData.weather[0].description }}</p>
-    </div>
+      <span>{{ weatherData.weather[0].description }}</span>
+    </main>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
         : null;
     },
     apiKey() {
-      return import.meta.env.VITE_WEATHER_API_KEY; // Ensure the API key is correctly configured
+      return import.meta.env.VITE_WEATHER_API_KEY; // Make sure the API key is in your .env file
     },
   },
   mounted() {
@@ -76,3 +76,59 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  box-sizing: border-box;
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  height: 40px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+main {
+  text-align: center;
+  margin-top: 20px;
+}
+
+main img {
+  width: 100px;
+  height: 100px;
+}
+</style>
